@@ -3,7 +3,7 @@
 **Name**: Christopher Brown
 
 <details>
-  <summary>View Initial Libraries for this Project</summary>
+<summary>Click to View Initial Libraries for this Project</summary>
     
 ```python
 import pandas as pd
@@ -20,6 +20,7 @@ from scipy import stats
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 ```
+</details>
 
 ## Introduction
 
@@ -27,6 +28,8 @@ The data for this project consists of a set of recipes from food.com and a set o
 
 ## Data Cleaning and Exploratory Data Analysis
 
+<details>
+<summary>Click to View Code</summary>
 
 ```python
 # Load csv's as df's
@@ -44,24 +47,10 @@ recipes['avg_rating'] = recipes['id'].map(avg_rating_per_recipe)
 ```python
 merged_df.head(2)
 ```
+</details>
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -131,9 +120,10 @@ merged_df.head(2)
 </div>
 
 
-
 ### Univariate Analysis
 
+<details>
+<summary>Click to View Code</summary>
 
 ```python
 sns.set_style("whitegrid")
@@ -204,7 +194,7 @@ numeric_cols = ['minutes', 'n_ingredients', 'n_steps', 'rating']
 summary_stats = merged_df[numeric_cols].describe()
 print(summary_stats)
 ```
-
+</details>
 
     
 ![png](template_files/template_8_0.png)
@@ -225,6 +215,8 @@ print(summary_stats)
 
 ### Bivariate Analysis
 
+<details>
+<summary>Click to View Code</summary>
 
 ```python
 plt.figure(figsize=(16, 6))
@@ -289,26 +281,7 @@ plt.title('Correlation Heatmap of Key Variables')
 plt.tight_layout()
 plt.show()
 ```
-
-    C:\Users\chris\AppData\Local\Temp\ipykernel_30708\1369208290.py:9: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
-    
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      clean_data['rating_jittered'] = clean_data['rating'] + np.random.uniform(-0.1, 0.1, size=len(clean_data))
-    C:\Users\chris\AppData\Local\Temp\ipykernel_30708\1369208290.py:27: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
-      avg_by_bin = sample_data.groupby('time_bin')['rating'].mean()
-    C:\Users\chris\AppData\Local\Temp\ipykernel_30708\1369208290.py:36: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
-    
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      clean_data['ingredient_bins'] = pd.cut(clean_data['n_ingredients'],
-    C:\Users\chris\AppData\Local\Temp\ipykernel_30708\1369208290.py:40: FutureWarning: 
-    
-    Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
-    
-      sns.violinplot(x='ingredient_bins', y='rating', data=clean_data,
+</details>
     
 
 
@@ -333,6 +306,8 @@ plt.show()
 
 ### Interesting Aggregates 
 
+<details>
+<summary>Click to View Code</summary>
 
 ```python
 # Aggregate 1: Average rating by cooking time category
@@ -378,11 +353,7 @@ merged_df.drop(['cooking_time_category', 'ingredient_category'], axis=1, inplace
 if 'ingredient_bins' in clean_data.columns:
     clean_data.drop('ingredient_bins', axis=1, inplace=True)
 ```
-
-    C:\Users\chris\AppData\Local\Temp\ipykernel_30708\2559457503.py:6: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
-      agg_time_rating = merged_df.groupby('cooking_time_category').agg({
-    C:\Users\chris\AppData\Local\Temp\ipykernel_30708\2559457503.py:19: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
-      agg_ing_rating = merged_df.groupby('ingredient_category').agg({
+</details>
     
 
     
@@ -435,16 +406,12 @@ if 'ingredient_bins' in clean_data.columns:
     pork tenderloin with lime and chipotle                      11.0  
     cranberry cashew chocolate bark                              4.0  
     
-
-    C:\Users\chris\AppData\Local\Temp\ipykernel_30708\2559457503.py:42: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame
-    
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      clean_data.drop('ingredient_bins', axis=1, inplace=True)
     
 
 ## Assessment of Missingness
 
+<details>
+<summary>Click to View Code</summary>
 
 ```python
 sns.set_style("whitegrid")
@@ -575,7 +542,7 @@ print(f"  P-value: {p_year:.4f}")
 print(f"  Null mean: {null_mean_year:.4f} years")
 print(f"  Result: {'FAIL to reject null ' if p_year >= 0.05 else 'REJECT null'}")
 ```
-
+</details>
 
     
 ![png](template_files/template_14_0.png)
@@ -613,6 +580,8 @@ Alternate Hypothesis: Cooking time and recipe rating are correlated
 
 Test Statistic: Pearson's Correlation Coefficient (r)
 
+<details>
+<summary>Click to View Code</summary>
 
 ```python
 clean_data = merged_df.dropna(subset=['minutes', 'rating'])
@@ -649,9 +618,9 @@ print(f"P-value: {p_value:.6f}")
 print(f"Significant at alpha = 0.05? {'YES' if p_value < 0.05 else 'NO'}")
 
 ```
+</details>
 
     Permutation Test: Cooking Time vs Recipe Rating
-    --------------------------------------------------
     Sample size: 219,393
     Observed correlation (r): 0.001440
     P-value: 0.455600
@@ -664,6 +633,8 @@ Model will aim to predict ratings of recipes.
 
 ## Baseline Model
 
+<details>
+<summary>Click to View Code</summary>
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -785,6 +756,7 @@ print(f"Training vs test RMSE ratio: {train_rmse/test_rmse:.3f} (should be close
 print("\nTop 5 feature coefficients:")
 print(feature_importance.head(5).to_string(index=False))
 ```
+</details>
 
     ============================================================
     BASELINE MODEL (FIXED)
@@ -822,6 +794,8 @@ print(feature_importance.head(5).to_string(index=False))
 
 ## Final Model
 
+<details>
+<summary>Click to View Code</summary>
 
 ```python
 from sklearn.model_selection import GridSearchCV
@@ -952,6 +926,7 @@ for i, (bar, imp) in enumerate(zip(bars, top_imp)):
 plt.tight_layout()
 plt.show()
 ```
+</details>
 
     Split: 80, 20
     
@@ -997,6 +972,8 @@ than for recipes that take 30 minutes or more.
 
 Test Statistic: difference in RMSE
 
+<details>
+<summary>Click to View Code</summary>
 
 ```python
 y_pred = final_model.predict(X_test)
@@ -1043,6 +1020,7 @@ print(f"Observed RMSE difference (short − long): {observed_stat:.4f}")
 print(f"P-value (permutation test): {p_value:.6f}")
 
 ```
+</details>
 
     Fairness Analysis: Cook Time < 30 vs ≥ 30 Minutes
     ------------------------------------------------------------
