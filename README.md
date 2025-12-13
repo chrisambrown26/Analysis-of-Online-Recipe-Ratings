@@ -2,9 +2,9 @@
 
 **Name**: Christopher Brown
 
-**Website Link**: https://chrisambrown26.github.io/Analysis-of-Online-Recipe-Ratings/
-
-
+<details>
+  <summary>View Initial Libraries for this Project</summary>
+    
 ```python
 import pandas as pd
 import numpy as np
